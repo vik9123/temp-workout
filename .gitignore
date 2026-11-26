@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Capacitor (Android-проект генерируется в CI: npx cap add android)
+android/
+ios/
+*.apk
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
