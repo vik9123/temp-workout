@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #000312;
+    --surface: #0a0f24;
+    --surface-2: #10173a;
+    --line: rgba(255, 255, 255, 0.1);
+    --ink: #ffffff;
+    --sub: #b7b7b7;
+    --brand: #f95e2c;
+    --brand-ink: #16080a;
+    --indigo: #4f5af0;
+
+    --background: 229 78% 4%;
+    --foreground: 0 0% 100%;
+    --card: 230 57% 9%;
+    --card-foreground: 0 0% 100%;
+    --popover: 230 57% 9%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 16 94% 57%;
+    --primary-foreground: 340 60% 6%;
+    --secondary: 233 55% 15%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 233 55% 15%;
+    --muted-foreground: 0 0% 72%;
+    --accent: 16 94% 57%;
+    --accent-foreground: 340 60% 6%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 16 94% 57%;
+    --radius: 1.125rem;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: var(--navy);
+  }
+
+  body {
+    @apply text-foreground antialiased;
+    background:
+      radial-gradient(120% 60% at 50% -10%, rgba(79, 90, 240, 0.18), transparent 60%),
+      var(--navy);
+    min-height: 100dvh;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  * {
+    border-color: var(--line);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Oswald', 'Inter', system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card-surface {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
