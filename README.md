@@ -3,16 +3,23 @@
 Мобильное приложение для тренировок по программе 2026/27: фулбоди 3 дня в неделю (Вт / Чт / Вс).
 Работает как PWA в браузере и как нативное Android-приложение (APK, обёртка Capacitor).
 
-## Скачать APK для Android
+## Сборка APK для Android
 
-Каждый пуш в `main` автоматически собирает APK через GitHub Actions:
+Понадобятся JDK 21 и Android SDK (платформа android-35, build-tools 35):
 
-1. Открой страницу **[Releases](../../releases)** и скачай **temp.apk** из последнего релиза
-2. Перекинь файл на телефон (или скачай сразу в браузере телефона) и открой его
-3. При первой установке разреши «установку из неизвестных источников» для браузера / файлового менеджера
+```bash
+npm install
+python3 scripts/generate-icons.py
+npm run build
+npx cap add android                       # один раз — создаёт папку android/
+python3 scripts/generate-android-icons.py # иконки приложения
+npx cap sync android                      # копирует веб-сборку в android/
+cd android && ./gradlew assembleDebug
+```
+
+Готовый файл: `android/app/build/outputs/apk/debug/app-debug.apk` — перекинь его на телефон, открой и разреши «установку из неизвестных источников» при первой установке.
 
 Приложение работает полностью офлайн, все данные (история тренировок, настройки) хранятся на телефоне.
-Пересобрать APK вручную можно из вкладки **Actions → Android APK → Run workflow**.
 
 ## Что внутри
 
@@ -65,7 +72,6 @@ src/
 scripts/generate-icons.py         — генератор иконок PWA
 scripts/generate-android-icons.py — генератор иконок Android (после npx cap add android)
 capacitor.config.ts               — конфиг нативной обёртки (appId com.temp.workout)
-.github/workflows/android.yml     — CI: сборка APK и публикация в Releases
 ```
 
 Данные (история тренировок, настройки) хранятся в localStorage — облачной синхронизации нет.
